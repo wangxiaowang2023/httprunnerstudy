@@ -1,0 +1,31 @@
+
+config:
+    name: 试一下demo testcase
+    verify: false
+#    headers:
+#        Content-Type: application/json
+#        longitude: "113.92224927070073"
+#        latitude: "22.54845664"
+#        adCode: "440305"
+#        sourceType: "1"
+#        clientType: "1"
+#        Connection: keep-alive
+
+teststeps:
+-
+    name: 测试demo step 1
+    api: api/demo_api3.yml
+    verify: false
+#    headers: $headers
+#    extract:
+#        - token: json.data.content.token
+    validate:
+        - eq: ["status_code", 200]
+#-
+#    name: 测试demo step 2
+#    api: api/demo_api2.yml
+#
+##    extract:
+##        - token: json.data.content.token
+#    validate:
+#        - eq: [ "status_code", 200 ]

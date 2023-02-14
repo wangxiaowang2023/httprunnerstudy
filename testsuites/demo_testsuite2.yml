@@ -1,0 +1,9 @@
+
+config:
+    name: 测试demo testsuite
+    base_url: https://dev.ejiayou.com
+
+testcases:
+-
+    name: testcases/demo_testcase2.yml
+    testcase: testcases/demo_testcase2.yml

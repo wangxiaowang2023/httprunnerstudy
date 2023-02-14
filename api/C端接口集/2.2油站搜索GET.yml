@@ -1,0 +1,25 @@
+
+name: 2.2油站搜索
+variables:
+    var1: value1
+    stationName: "银湖加油站"
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+        Authorization: $token
+request:
+    url: /ensd-c-interface/homePage/getStationByName
+    method: GET
+    headers: $headers
+    params:
+        currentPage: 1
+        pageSize: 10
+        stationName: $stationName
+validate:
+    - eq: ["status_code", 200]
+    - eq: [ json.message, "操作成功" ]

@@ -1,0 +1,24 @@
+
+name: 4兑换码兑换优惠券
+variables:
+#    var1: value1
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+        Authorization: $token
+request:
+    url: /ensd-c-interface/myHome/couponsExchange
+    method: POST
+    headers: $headers
+    json:
+        exchangeCode: "Tshohhwz53fonz"
+#        sidx:
+validate:
+    - eq: [ status_code, 200]
+    - eq: [ json.message, "操作成功" ]
+    - eq: [ json.message, "操作成功" ]

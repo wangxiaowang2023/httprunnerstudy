@@ -1,0 +1,45 @@
+
+name: 1C端登录的
+variables:
+#    base_url: https://dev.ejiayou.com
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+    json:
+        smsCode: 666666
+        loginType: BY_PHONE
+        phoneType: 1
+        phone: 13200000001
+        version: 6.5.8
+request:
+    url: /ensd-c-interface/login
+    method: POST
+    headers: $headers
+#        Content-Type: application/json
+#        Content-Type: application/json
+#        longitude: "113.92224927070073"
+#        latitude: "22.54845664"
+#        adCode: "440305"
+#        sourceType: "1"
+#        clientType: "1"
+#        Connection: keep-alive
+#    extract:
+#        - token: content.token
+
+    json: $json
+#        smsCode: 666666
+#        loginType: BY_PHONE
+#        phoneType: 1
+#        phone: 13200000001
+#        version: 6.5.8
+
+
+validate:
+    - eq: [ status_code, 200]
+    - eq: [ json.message, "操作成功" ]
+

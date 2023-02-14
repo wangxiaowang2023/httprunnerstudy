@@ -1,0 +1,6 @@
+- 基于httprunner框架的接口自动化项目
+- httprunner==2.5.4
+- python==3.7.0
+- 终端生成报告的命令行
+  - hrun.\testsuites\demo_testsuite_c.yml - -log - level debug
+- main运行,run_httprunner

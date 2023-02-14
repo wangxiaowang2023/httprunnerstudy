@@ -1,0 +1,23 @@
+
+name: 2.3油站首页--油站基本信息
+variables:
+    var1: value1
+    stationId: 10189
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+        Authorization: $token
+request:
+    url: /ensd-c-interface/homePage/getStationBasicMessage
+    method: POST
+    headers: $headers
+    json:
+        stationId: $stationId
+        oilId: "1"
+validate:
+    - eq: ["status_code", 200]

@@ -1,0 +1,10 @@
+
+config:
+    name: 测试demo testsuite
+    base_url: https://dev.ejiayou.com
+    verify: false
+
+testcases:
+-
+    name: testcases/demo_testcase3
+    testcase: testcases/demo_testcase3.yml

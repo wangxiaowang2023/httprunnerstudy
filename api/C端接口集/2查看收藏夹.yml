@@ -1,0 +1,28 @@
+
+name: 2查看我的收藏夹
+variables:
+#    base_url: https://dev.ejiayou.com
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+        Authorization: $token
+request:
+    url: /ensd-c-interface/myHome/getCollectedOilStations
+    method: POST
+    headers: $headers
+#        Content-Type: application/json
+    json:
+        currentPage: 1
+        pageSize: 10
+        orderingRule: 1
+        oilId: 1
+#        oilBrands: [ ]
+validate:
+    - eq: [ status_code, 200]
+    - eq: [ json.message, "操作成功" ]
+

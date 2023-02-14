@@ -1,0 +1,165 @@
+
+config:
+    name: C端登录测试demo testcase
+    output:
+        - token
+        - stationId
+#    stationId: 10189
+#    headers:
+##        Content-Type: application/json
+#        longitude: "113.92224927070073"
+#        latitude: "22.54845664"
+#        adCode: "440305"
+#        sourceType: "1"
+#        clientType: "1"
+#        Connection: keep-alive
+#    variables:
+#        device_sn: "ABC"
+#        username: ${ENV(USERNAME)}
+#        password: ${ENV(PASSWORD)}
+#    base_url: "http://127.0.0.1:5000"
+
+teststeps:
+-
+    name: 1测试C端登录
+    api: api/C端接口集/1C端登录.yml
+#    headers: $headers
+#    variables:
+#        user_agent: 'iOS/10.3'
+#        device_sn: $device_sn
+    extract:
+        - token: json.data.token
+    validate:
+        - eq: ["status_code", 200]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.phone, "13200000001" ]
+
+-
+    name: 2.1查看首页油站
+    api: api/C端接口集/2.1获取首页油站.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 2.2油站搜索GET
+    api: api/C端接口集/2.2油站搜索GET.yml
+    headers:
+        Authorization: $token
+#    extract:
+#        stationId: json.data.list.stationId
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 2.3油站首页--油站基本信息
+    api: api/C端接口集/2.3油站首页--油站基本信息.yml
+    headers:
+        Authorization: $token
+#    json:
+#        stationId: $stationId
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.stationId, $stationId ]
+
+-
+    name: 2.5查询油站优惠券数量
+    api: api/C端接口集/2.5查询油站优惠券数量.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data, "关注油站成功!" ]
+-
+    name: 2.4添加油站进收藏夹
+    api: api/C端接口集/2.4添加油站进收藏夹.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data, "关注油站成功!" ]
+
+-
+    name: 2.6查询油站优惠券数量
+    api: api/C端接口集/2.6加油试算.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.orderSum, "94.12" ]
+-
+    name: 2查看我的收藏夹
+    api: api/C端接口集/2查看收藏夹.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - contained_by: [ json.data.list.stationName, "银湖加油站" ]
+
+#-
+#    name: 4兑换码兑换优惠券
+#    api: api/C端接口集/4兑换码兑换优惠券.yml
+#    headers:
+#        Authorization: $token
+#    validate:
+#        - eq: [ "status_code", 200 ]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 3查看我的优惠券
+    api: api/C端接口集/3查看我的优惠券.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - contained_by: [ json.data.list.couponName, "自动化测试兑换" ]
+
+-
+    name: 5查询我的订单列表
+    api: api/C端接口集/5查询我的订单列表.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - contained_by: [ json.data.list, ["已完成","已关闭"] ]
+
+-
+    name: 6.1查询我的售后订单列表
+    api: api/C端接口集/6.1查询我的订单列表.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+-
+    name: 6查询我的eplus状态
+    api: api/C端接口集/6查询我的eplus状态GET.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
