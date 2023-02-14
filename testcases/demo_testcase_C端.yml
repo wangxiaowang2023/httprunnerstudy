@@ -110,7 +110,7 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-#        - contained_by: [ json.data.list.stationName, "银湖加油站" ]
+#        - eq: [ json.data.list.0.2.stationName, "银湖加油站" ]
 
 #-
 #    name: 4兑换码兑换优惠券
@@ -131,7 +131,7 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-#        - contained_by: [ json.data.list.couponName, "自动化测试兑换" ]
+        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
 
 -
     name: 5查询我的订单列表
@@ -142,7 +142,7 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-#        - contained_by: [ json.data.list, ["已完成","已关闭"] ]
+        - eq: [ json.data.list.0.orderStatusName, "已取消" ]
 
 -
     name: 6.1查询我的售后订单列表
