@@ -9,7 +9,7 @@ config:
 
 testcases:
 -
-    name: 测试c端登录通不通 1
+    name: 测试c端登录通不通
     testcase: testcases/demo_testcase_C端.yml
 #    variables:
 #        device_sn: $device_sn
