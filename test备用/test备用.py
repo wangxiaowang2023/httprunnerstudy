@@ -33,3 +33,6 @@ print(time)
 
 # 这是生成报告的终端命令
 # hrun.\testsuites\demo_testsuite_c.yml - -log - level debug
+
+from markupsafe import soft_unicode
+soft_unicode(1)

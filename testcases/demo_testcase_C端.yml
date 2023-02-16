@@ -4,6 +4,8 @@ config:
     output:
         - token
         - stationId
+        - orderStatusName
+        - couponName
 #    stationId: 10189
 #    headers:
 ##        Content-Type: application/json
@@ -64,6 +66,9 @@ teststeps:
         Authorization: $token
 #    json:
 #        stationId: $stationId
+    extract:
+        - stationId: json.data.stationId
+
     validate:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
@@ -127,6 +132,9 @@ teststeps:
     api: api/C端接口集/3查看我的优惠券.yml
     headers:
         Authorization: $token
+
+    extract:
+        - couponName: json.data.list.0.couponName
     validate:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
@@ -138,6 +146,9 @@ teststeps:
     api: api/C端接口集/5查询我的订单列表.yml
     headers:
         Authorization: $token
+
+    extract:
+        - orderStatusName: json.data.list.0.orderStatusName
     validate:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
