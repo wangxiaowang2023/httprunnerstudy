@@ -174,3 +174,17 @@ teststeps:
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
 
+-
+    name: 7.1测试获取一级标签
+    api: api/C端接口集/7.1获取一级标签.yml
+#    headers: $headers
+#    variables:
+#        user_agent: 'iOS/10.3'
+#        device_sn: $device_sn
+#    extract:
+#        - token: json.data.token
+    validate:
+        - eq: ["status_code", 200]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.0.tagName, "测试标签" ]

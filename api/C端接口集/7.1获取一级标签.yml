@@ -1,0 +1,20 @@
+
+name: 油站首页--获取一级活动标签
+variables:
+    base_url: https://dev.ejiayou.com
+#    var2: value2 定义该文件内可用的局部变量，如base_url
+request:
+    url: /ensd-c-interface/homePage/getOneLevelActivityTag
+    method: GET
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+#    json:
+#        key: $var2
+validate:
+    - eq: ["status_code", 200]
