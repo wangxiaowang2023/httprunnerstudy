@@ -6,5 +6,6 @@ from httprunner.api import HttpRunner
 runner = HttpRunner(failfast=False)
 
 # 用类runner点run（"yml路径"）运行对应的yml文件测试套件或者测试用例
+# 测试一下webhook有没有用啊
 
 runner.run('testsuites/demo_testsuite_c.yml')
