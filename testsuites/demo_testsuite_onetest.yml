@@ -1,17 +1,16 @@
 
 config:
     name: 只对一个接口测试，方便快捷
-    base_url: https://dev.ejiayou.com
+    base_url: ${ENV(CURL)}
     verify: false
 
 testcases:
 -
     name: 只对一个接口测试，方便快捷
     testcase: testcases/demo_testcase_onetest.yml
-#    variables:
-#        device_sn: $device_sn
+-
+    name: C端2不需要传提取参的接口
+    testcase: testcases/demo_testcase_不传参.yml
 #-
-#    name: call demo_testcase with data 2
-#    testcase: path/to/demo_testcase.yml
-#    variables:
-#        device_sn: $device_sn
+#    name: C端2不需要传提取参的接口
+#    testcase: testcases/demo_testcase_不传参.yml

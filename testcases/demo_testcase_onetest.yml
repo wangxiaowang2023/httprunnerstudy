@@ -1,8 +1,19 @@
 
 config:
     name: C端登录测试demo testcase
+#    variables:
+#        headers2:
+#            Content-Type: application/json
+#            longitude: "113.92224927070073"
+#            latitude: "22.54845664"
+#            adCode: "440305"
+#            sourceType: "1"
+#            clientType: "1"
+#            Connection: keep-alive
+#            Authorization: $token
     output:
         - token
+        - userId
 #        - stationId
 #        - orderStatusName
 #        - couponName
@@ -17,22 +28,23 @@ teststeps:
 #        device_sn: $device_sn
     extract:
         - token: json.data.token
+        - userId: json.data.userId
     validate:
         - eq: ["status_code", 200]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
         - eq: [ json.data.phone, "13200000001" ]
--
-    name: 测试获取一级标签
-    api: api/C端接口集/7.1获取一级标签.yml
-#    headers: $headers
-#    variables:
-#        user_agent: 'iOS/10.3'
-#        device_sn: $device_sn
-#    extract:
-#        - token: json.data.token
-    validate:
-        - eq: ["status_code", 200]
-        - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.0.tagName, "测试标签" ]
+#-
+#    name: 2.8创建订单并支付
+#    api: api/C端接口集/2.8创建订单并支付.yml
+#    headers:
+#        Authorization: $token
+##        user_agent: 'iOS/10.3'
+##        device_sn: $device_sn
+##    extract:
+##        - token: json.data.token
+#    validate:
+#        - eq: ["status_code", 200]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+##        - eq: [ json.data.0.tagName, "测试标签" ]

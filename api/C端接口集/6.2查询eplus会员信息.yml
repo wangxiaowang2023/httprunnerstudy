@@ -1,8 +1,8 @@
 
-name: 2.2油站搜索
+name: 查询eplus会员信息
 variables:
     var1: value1
-#    stationName: "Mike测试加油站活动测试，勿改数据"
+    stationId: 10189
     headers:
         Content-Type: application/json
         longitude: "113.92224927070073"
@@ -13,13 +13,12 @@ variables:
         Connection: keep-alive
         Authorization: $token
 request:
-    url: /ensd-c-interface/homePage/getStationByName
+    url: /ensd-c-interface/eplus/isEplusUser
     method: GET
     headers: $headers
-    params:
-        currentPage: 1
-        pageSize: 10
-        stationName: ${ENV(STATIONNAME)}
+#    json:
+#        codeKeyList: []
+#        userId: $userId
+
 validate:
     - eq: ["status_code", 200]
-    - eq: [ json.message, "操作成功" ]

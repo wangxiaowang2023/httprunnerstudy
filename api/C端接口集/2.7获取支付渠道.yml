@@ -1,5 +1,5 @@
 
-name: 2.5查询油站优惠券数量
+name: 2.7获取支付渠道
 variables:
     var1: value1
 #    stationId: 10189
@@ -13,13 +13,20 @@ variables:
         Connection: keep-alive
         Authorization: $token
 request:
-    url: /ensd-c-interface/homePage/getStationRelatedCouponTotal
+    url: /ensd-c-interface/homePage/getPayChannel
     method: POST
     headers: $headers
     json:
-        oilId: 1
-        stationId: $stationId
-        trialPrice: 200
+#        oilTypeId: 1
+#        stationId: $stationId
+#        oilPrice: 100
+#        autoChooseCoupons: 2
+        oilId: 3
+        fillingStationId: $stationId
+        payTerminalId: 0004
+        payEnvironment:
+#        couponsId: null,
+#        payModeId: ""
 validate:
     - eq: [ status_code, 200 ]
     - eq: [ json.message, "操作成功" ]

@@ -14,7 +14,7 @@ variables:
         smsCode: 666666
         loginType: BY_PHONE
         phoneType: 1
-        phone: 13200000001
+        phone: ${ENV(PHONE)}
         version: 6.5.8
 request:
     url: /ensd-c-interface/login

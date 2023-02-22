@@ -2,7 +2,7 @@
 name: 2.4添加油站进收藏夹
 variables:
 #    var1: value1
-    stationId: 10189
+#    stationId: 10189
     headers:
         Content-Type: application/json
         longitude: "113.92224927070073"

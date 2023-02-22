@@ -1,0 +1,46 @@
+
+name: 2.8创建订单并支付
+variables:
+    var1: value1
+#    stationId: 10189
+    headers:
+        Content-Type: application/json
+        longitude: "113.92224927070073"
+        latitude: "22.54845664"
+        adCode: "440305"
+        sourceType: "1"
+        clientType: "1"
+        Connection: keep-alive
+        Authorization: $token
+request:
+    url: /ensd-c-interface/homePage/createOrderAndPay
+    method: POST
+    headers: $headers
+    json:
+#        oilTypeId: 1
+#        stationId: $stationId
+#        oilPrice: 100
+#        autoChooseCoupons: 2
+#        oilId: 3
+#        fillingStationId: $stationId
+#        payTerminalId: 0004
+#        payEnvironment: 1
+#
+        merchantProductId: 0002    # 支付方式通道
+        stationId: 38289   # 油站ID
+        supplierId: 14732   # 供应商ID
+        oilTypeId: 1        # 油品Id
+        oilTypeName: 92#    # 油品号
+        machId: 209410      # 加油枪号
+        machNum: 1号油枪       # 油枪名称
+        payAmount: 100.00   # 订单实际支付金额
+        supplierName: 测试结算系统 # 供应商名称
+        oilPrice: 100       # 输入的加油金额
+        couponsId: 114065   # 选择对应的优惠券ID
+        stationName: Mike测试直降活动，勿动改数据
+        payModeId: 0001     # 支付方式id
+#        couponsId: null,
+#        payModeId: ""
+validate:
+    - eq: [ status_code, 200 ]
+    - eq: [ json.message, "操作成功" ]

@@ -1,8 +1,8 @@
 
-name: 2.3油站首页--油站基本信息
+name: 8.我的--修改用户信息
 variables:
-    var1: value1
-#    stationId: 10189
+#    base_url: https://dev.ejiayou.com
+#    var2: value2 定义该文件内可用的局部变量，如base_url
     headers:
         Content-Type: application/json
         longitude: "113.92224927070073"
@@ -13,11 +13,15 @@ variables:
         Connection: keep-alive
         Authorization: $token
 request:
-    url: /ensd-c-interface/homePage/getStationBasicMessage
+    url: /ensd-c-interface/myHome/updateUserInfo
     method: POST
     headers: $headers
     json:
-        stationId: $stationId
-        oilId: "1"
+        avatar: ""
+        birthday: ""
+        createdTime: ""
+        nickname: "汪测试修改名字"
+        phone: ""
+        sex: 0
 validate:
     - eq: ["status_code", 200]

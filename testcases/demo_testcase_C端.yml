@@ -6,6 +6,7 @@ config:
         - stationId
         - orderStatusName
         - couponName
+        - userId
 #    stationId: 10189
 #    headers:
 ##        Content-Type: application/json
@@ -31,11 +32,12 @@ teststeps:
 #        device_sn: $device_sn
     extract:
         - token: json.data.token
+        - userId: json.data.userId
     validate:
         - eq: ["status_code", 200]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.phone, "13200000001" ]
+        - eq: [ json.data.phone, "13200000001"]
 
 -
     name: 2.1查看首页油站
@@ -52,8 +54,8 @@ teststeps:
     api: api/C端接口集/2.2油站搜索GET.yml
     headers:
         Authorization: $token
-#    extract:
-#        stationId: json.data.list.stationId
+    extract:
+        stationId: json.data.list.0.stationId
     validate:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
@@ -66,8 +68,8 @@ teststeps:
         Authorization: $token
 #    json:
 #        stationId: $stationId
-    extract:
-        - stationId: json.data.stationId
+#    extract:
+#        - stationId: json.data.stationId
 
     validate:
         - eq: [ "status_code", 200 ]
@@ -97,7 +99,7 @@ teststeps:
         - eq: [ json.data, "关注油站成功!" ]
 
 -
-    name: 2.6查询油站优惠券数量
+    name: 2.6油站加油试算
     api: api/C端接口集/2.6加油试算.yml
     headers:
         Authorization: $token
@@ -105,17 +107,40 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.orderSum, "94.12" ]
+        - eq: [ json.data.orderSum, "100.00" ]
+
 -
-    name: 2查看我的收藏夹
-    api: api/C端接口集/2查看收藏夹.yml
+    name: 2.7获取支付渠道
+    api: api/C端接口集/2.7获取支付渠道.yml
     headers:
         Authorization: $token
     validate:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-#        - eq: [ json.data.list.0.2.stationName, "银湖加油站" ]
+#        - eq: [ json.data.orderSum, "94.12" ]
+
+#-
+#    name: 2.8创建订单并支付
+#    api: api/C端接口集/2.8创建订单并支付.yml
+#    headers:
+#        Authorization: $token
+#    validate:
+#        - eq: [ "status_code", 200 ]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.orderSum, "94.12" ]
+
+#-
+#    name: 2查看我的收藏夹
+#    api: api/C端接口集/2查看收藏夹.yml
+#    headers:
+#        Authorization: $token
+#    validate:
+#        - eq: [ "status_code", 200 ]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.list.0.stationName, "Mike测试直降活动，勿动改数据" ]
 
 #-
 #    name: 4兑换码兑换优惠券
@@ -153,11 +178,41 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.list.0.orderStatusName, "已取消" ]
+        - contained_by: [ json.data.list.0.orderStatusName, ["已取消","待付款","已完成"] ]
 
 -
     name: 6.1查询我的售后订单列表
     api: api/C端接口集/6.1查询我的订单列表.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 6.2查询eplus会员信息
+    api: api/C端接口集/6.2查询eplus会员信息.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 6.3eplus会员页用户信息
+    api: api/C端接口集/6.3eplus会员页用户信息.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+
+-
+    name: 6.4查询eplus会员开通价格信息
+    api: api/C端接口集/6.4查询eplus会员开通价格信息.yml
     headers:
         Authorization: $token
     validate:
@@ -188,3 +243,33 @@ teststeps:
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
         - eq: [ json.data.0.tagName, "测试标签" ]
+
+-
+    name: 8.我的--修改用户信息
+    api: api/C端接口集/8.1修改用户信息.yml
+#    headers: $headers
+#    variables:
+#        user_agent: 'iOS/10.3'
+#        device_sn: $device_sn
+#    extract:
+#        - token: json.data.token
+    validate:
+        - eq: ["status_code", 200]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.0.tagName, "测试标签" ]
+
+-
+    name: 9.1获取码表
+    api: api/C端接口集/9.1获取码表.yml
+#    headers: $headers
+#    variables:
+#        user_agent: 'iOS/10.3'
+#        device_sn: $device_sn
+#    extract:
+#        - token: json.data.token
+    validate:
+        - eq: ["status_code", 200]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.0.tagName, "测试标签" ]

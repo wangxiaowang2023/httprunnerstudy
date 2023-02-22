@@ -1,0 +1,23 @@
+
+config:
+    name: demo_testcase_C端2不需要传提取参的接口
+#    verify: false
+
+teststeps:
+-
+    name: 2查看我的收藏夹
+    api: api/C端接口集/2查看收藏夹.yml
+    headers:
+        Authorization: $token
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+#-
+#    name: 测试demo step 2
+##    api: api/demo_api2.yml
+#
+##    extract:
+##        - token: json.data.content.token
+#    validate:
+#        - eq: [ "status_code", 200 ]
