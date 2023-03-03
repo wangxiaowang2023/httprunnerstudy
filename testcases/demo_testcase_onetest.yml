@@ -15,6 +15,7 @@ config:
     output:
         - token
         - userId
+        - couponName
 #        - stationId
 #        - orderStatusName
 #        - couponName
@@ -35,6 +36,19 @@ teststeps:
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
         - eq: [ json.data.phone, "13200000001" ]
+
+-
+    name: 3查看我的优惠券
+    api: api/C端接口集/3查看我的优惠券.yml
+    headers:
+        Authorization: $token
+    extract:
+        - couponName: json.data.list.0.couponName
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
 #-
 #    name: 2.8创建订单并支付
 #    api: api/C端接口集/2.8创建订单并支付.yml

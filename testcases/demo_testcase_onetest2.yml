@@ -1,6 +1,8 @@
 
 config:
-    name: demo_testcase_C端2不需要传提取参的接口
+    name: 2查看我的优惠券
+#    output:
+#        - couponName
 #    variables:
 #        headers2:
 #            Content-Type: application/json
@@ -19,9 +21,21 @@ config:
 #        - couponName
 
 teststeps:
+#-
+#    name: 3查看我的优惠券
+#    api: api/C端接口集/3查看我的优惠券.yml
+#    headers:
+#        Authorization: $token
+#    extract:
+#        - couponName: json.data.list.0.couponName
+#    validate:
+#        - eq: [ "status_code", 200 ]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
 -
-    name: 2查看收藏夹
-    api: api/C端接口集/2查看收藏夹.yml
+    name: 3查看我的优惠券
+    api: api/C端接口集/3查看我的优惠券.yml
 #    headers: $headers
 #    variables:
 #        user_agent: 'iOS/10.3'

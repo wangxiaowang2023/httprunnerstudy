@@ -10,7 +10,7 @@ mysql = ReadConfig()
 
 # 创建MysqlDb这个类
 class MysqlDb:
-    def __int__(self, DBname):  # 用私有方法定义连接 等下给下面引用
+    def __init__(self, DBname):  # 用私有方法定义连接 等下给下面引用
         self.host = mysql.DateBase(DBname + "host")  # 获取具体的host地址
         self.user = mysql.DateBase(DBname + "user")  # 获取具体的user账号
         self.passwd = mysql.DateBase(DBname + "passwd")  # 获取具体的数据库密码
