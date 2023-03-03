@@ -77,3 +77,4 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
 if __name__ == '__main__':
     t = DB('dev')
     print(t.select_all("SELECT * from  ejy_ucs.member_coupon where member_id='103969997';"))
+    print("asdasda")
