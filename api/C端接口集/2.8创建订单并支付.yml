@@ -25,7 +25,7 @@ request:
 #        fillingStationId: $stationId
 #        payTerminalId: 0004
 #        payEnvironment: 1
-#
+#json:
         merchantProductId: 0002    # 支付方式通道
         stationId: 38289   # 油站ID
         supplierId: 14732   # 供应商ID

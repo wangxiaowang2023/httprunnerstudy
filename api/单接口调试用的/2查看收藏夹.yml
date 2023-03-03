@@ -1,8 +1,7 @@
 
-name: 2.6加油试算
+name: 2查看我的收藏夹
 variables:
-    var1: value1
-#    stationId: 10189
+#    base_url: https://dev.ejiayou.com
     headers:
         Content-Type: application/json
         longitude: "113.92224927070073"
@@ -13,16 +12,17 @@ variables:
         Connection: keep-alive
         Authorization: $token
 request:
-    url: /ensd-c-interface/homePage/oilPriceTrial
+    url: /ensd-c-interface/myHome/getCollectedOilStations
     method: POST
     headers: $headers
+#        Content-Type: application/json
     json:
-        oilTypeId: "1"
-        stationId: $stationId
-        oilPrice: "100"
-        autoChooseCoupons: 1
-        couponsId: null
-        payModeId: ""
+        currentPage: 1
+        pageSize: 10
+        orderingRule: 1
+        oilId: 1
+#        oilBrands: [ ]
 validate:
-    - eq: [ status_code, 200 ]
+    - eq: [ status_code, 200]
     - eq: [ json.message, "操作成功" ]
+

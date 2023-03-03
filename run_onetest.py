@@ -8,4 +8,5 @@ runner = HttpRunner(failfast=False)
 
 # 再用继承的类用点去调用方法去运行,括号里面直接放运行文件的路径就可以
 
+# runner.run('testsuites/demo_testsuite_onetest.yml')
 runner.run('testsuites/demo_testsuite_onetest.yml')

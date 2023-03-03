@@ -1,7 +1,7 @@
 
 name: 油站首页--获取一级活动标签
 variables:
-    base_url: https://dev.ejiayou.com
+#    base_url: https://dev.ejiayou.com
 #    var2: value2 定义该文件内可用的局部变量，如base_url
 request:
     url: /ensd-c-interface/homePage/getOneLevelActivityTag

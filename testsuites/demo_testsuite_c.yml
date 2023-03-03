@@ -18,6 +18,6 @@ testcases:
 #    testcase: path/to/demo_testcase.yml
 #    variables:
 #        device_sn: $device_sn
--
-    name: C端2不需要传提取参的接口.yml
-    testcase: testcases/demo_testcase_不传参.yml
+#-
+#    name: C端2不需要传提取参的接口.yml
+#    testcase: testcases/demo_testcase_不传参.yml

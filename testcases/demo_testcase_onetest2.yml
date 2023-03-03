@@ -1,7 +1,6 @@
 
 config:
-
-    name: C端登录测试demo testcase
+    name: demo_testcase_C端2不需要传提取参的接口
 #    variables:
 #        headers2:
 #            Content-Type: application/json
@@ -12,24 +11,24 @@ config:
 #            clientType: "1"
 #            Connection: keep-alive
 #            Authorization: $token
-    output:
-        - token
-        - userId
+#    output:
+#        - token
+#        - userId
 #        - stationId
 #        - orderStatusName
 #        - couponName
 
 teststeps:
 -
-    name: 1测试C端登录
-    api: api/C端接口集/1C端登录.yml
+    name: 2查看收藏夹
+    api: api/C端接口集/2查看收藏夹.yml
 #    headers: $headers
 #    variables:
 #        user_agent: 'iOS/10.3'
 #        device_sn: $device_sn
-    extract:
-        - token: json.data.token
-        - userId: json.data.userId
+#    extract:
+#        - token: json.data.token
+#        - userId: json.data.userId
     validate:
         - eq: ["status_code", 200]
         - eq: [ json.code, 200 ]
