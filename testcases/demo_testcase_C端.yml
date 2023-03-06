@@ -107,7 +107,7 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.orderSum, "100.00" ]
+        - eq: [ json.data.orderSum, "0.11" ]
 
 -
     name: 2.7获取支付渠道

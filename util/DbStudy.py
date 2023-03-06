@@ -32,7 +32,13 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             self.close()
+            print("你连接的数据库host为：" + self.host)
+            print("你连接的数据库的datebase为：" + self.database)
+            print("你输入的sql语句为：", sql)
         except Exception as e:
+            print("你连接的数据库host为：" + self.host)
+            print("你连接的数据库的datebase为：" + self.database)
+            print("你输入的sql语句为：", sql)
             print("输入的sql语句错误select error是：", e)
         return result
 
@@ -43,7 +49,13 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
             self.cursor.execute(sql)
             result = self.cursor.fetchall()
             self.close()
+            print("你连接的数据库host为：" + self.host)
+            print("你连接的数据库的datebase为：" + self.database)
+            print("你输入的sql语句为：", sql)
         except Exception as e:
+            print("你连接的数据库host为：" + self.host)
+            print("你连接的数据库的datebase为：" + self.database)
+            print("你输入的sql语句为：", sql)
             print('打印sql语句错误select error：', e)
         return result
 
@@ -55,6 +67,9 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
             result = self.cursor.execute(sql)
             self.db.commit()
             self.close()
+            print("你连接的数据库host为：" + self.host)
+            print("你连接的数据库的datebase为：" + self.database)
+            print("你输入的sql语句为：", sql)
         except Exception as e:
             print("增删查的sql语句错误，报错为：", e)
             result = 0
@@ -65,12 +80,21 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
     """_edit(self,sql) 其实就是做个判断，看看sql语句对不对，对就填进去，不对也不会影响库 下面的增删改都是基于这个方法"""
 
     def _insert_info(self, sql=None):  # 封装新增插入方法
+        print("你连接的数据库host为：" + self.host)
+        print("你连接的数据库的datebase为：" + self.database)
+        print("你输入的sql语句为：", sql)
         return self.edit(sql)
 
     def _updata(self, sql=None):  # 封装修改数据方法
+        print("你连接的数据库host为：" + self.host)
+        print("你连接的数据库的datebase为：" + self.database)
+        print("你输入的sql语句为：", sql)
         return self.edit(sql)
 
     def _delete(self, sql=None):  # 封装删除数据库方法，慎用
+        print("你连接的数据库host为：" + self.host)
+        print("你连接的数据库的datebase为：" + self.database)
+        print("你输入的sql语句为：", sql)
         return self.edit(sql)
 
 
