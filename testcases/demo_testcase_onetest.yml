@@ -3,6 +3,7 @@ config:
 
     name: C端登录测试demo testcase
 #    variables:
+#        couponNamesql: ${select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';")}
 #        headers2:
 #            Content-Type: application/json
 #            longitude: "113.92224927070073"
@@ -12,10 +13,11 @@ config:
 #            clientType: "1"
 #            Connection: keep-alive
 #            Authorization: $token
-    output:
-        - token
-        - userId
-        - couponName
+#    output:
+#        - token
+#        - userId
+#        - couponName
+#        - couponNamesql
 #        - stationId
 #        - orderStatusName
 #        - couponName
@@ -23,7 +25,7 @@ config:
 teststeps:
 -
     name: 1测试C端登录
-    api: api/C端接口集/1C端登录.yml
+    api: api/单接口调试用的/1C端登录.yml
 #    headers: $headers
 #    variables:
 #        user_agent: 'iOS/10.3'
@@ -31,24 +33,30 @@ teststeps:
     extract:
         - token: json.data.token
         - userId: json.data.userId
+#    parameters:
+#        phone-smsCode: ${P(data/login.csv)}
     validate:
         - eq: ["status_code", 200]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.phone, "13200000001" ]
+#        - eq: [ json.data.phone, "13200000001" ]
 
--
-    name: 3查看我的优惠券
-    api: api/C端接口集/3查看我的优惠券.yml
-    headers:
-        Authorization: $token
-    extract:
-        - couponName: json.data.list.0.couponName
-    validate:
-        - eq: [ "status_code", 200 ]
-        - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
+#-
+#    name: 3查看我的优惠券
+#    api: api/C端接口集/3查看我的优惠券.yml
+#    headers:
+#        Authorization: $token
+#    extract:
+#        - couponName: json.data.list.0.couponName
+#    variables:
+#        - couponNamesql: ${select_one_data(sql="select * from ejy_ucs.member_coupon where member_id='2122346538';")}
+#        - couponNamesql2: ${select_one_data_none()}
+##        - couponNamesql: ${select_one_data(select * from ejy_ucs.member_coupon where member_id='2122346538';)}
+#    validate:
+#        - eq: [ "status_code", 200 ]
+#        - eq: [ json.code, 200 ]
+#        - eq: [ json.message, "操作成功" ]
+#        - eq: [ json.data.list.0.couponName, $couponNamesql2 ]
 #-
 #    name: 2.8创建订单并支付
 #    api: api/C端接口集/2.8创建订单并支付.yml

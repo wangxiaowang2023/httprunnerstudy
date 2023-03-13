@@ -32,9 +32,9 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
             self.cursor.execute(sql)
             result = self.cursor.fetchone()
             self.close()
-            print("你连接的数据库host为：" + self.host)
-            print("你连接的数据库的datebase为：" + self.database)
-            print("你输入的sql语句为：", sql)
+            # print("你连接的数据库host为：" + self.host)
+            # print("你连接的数据库的datebase为：" + self.database)
+            # print("你输入的sql语句为：", sql)
         except Exception as e:
             print("你连接的数据库host为：" + self.host)
             print("你连接的数据库的datebase为：" + self.database)
@@ -79,19 +79,19 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
 
     """_edit(self,sql) 其实就是做个判断，看看sql语句对不对，对就填进去，不对也不会影响库 下面的增删改都是基于这个方法"""
 
-    def _insert_info(self, sql=None):  # 封装新增插入方法
+    def insert_info(self, sql=None):  # 封装新增插入方法
         print("你连接的数据库host为：" + self.host)
         print("你连接的数据库的datebase为：" + self.database)
         print("你输入的sql语句为：", sql)
         return self.edit(sql)
 
-    def _updata(self, sql=None):  # 封装修改数据方法
+    def updata(self, sql=None):  # 封装修改数据方法
         print("你连接的数据库host为：" + self.host)
         print("你连接的数据库的datebase为：" + self.database)
         print("你输入的sql语句为：", sql)
         return self.edit(sql)
 
-    def _delete(self, sql=None):  # 封装删除数据库方法，慎用
+    def delete(self, sql=None):  # 封装删除数据库方法，慎用
         print("你连接的数据库host为：" + self.host)
         print("你连接的数据库的datebase为：" + self.database)
         print("你输入的sql语句为：", sql)
@@ -100,5 +100,8 @@ class DB():  # 创建DB类,注意创建这个类实例的时候，必须传参�
 
 if __name__ == '__main__':
     t = DB('dev')
-    print(t.select_all("SELECT * from  ejy_ucs.member_coupon where member_id='103969997';"))
-    print("asdasda")
+    # print(t.select_one("SELECT * from  ejy_ucs.member_coupon where member_id='103969997';"))
+    # print("asdasda")
+#
+#     t.insert_info(sql="INSERT INTO ejy_finance.ejiayou_station_pay_mode_rel (station_id, station_name, pay_mode_id, settle_id, is_open, station_state, state, create_time, update_time, creator, updater, create_by, update_by)
+# VALUES ('38289', 'Mike测试直降活动，勿动改数据', 1, '[{"isBind":1,"settleId":2}]', 1, 1, 1, now(), now(), '李强', '李强', null, null);")

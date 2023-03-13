@@ -3,6 +3,7 @@ import time
 from httprunner import __version__
 from mysqlDB import MysqlDb
 from util import DbStudy
+import mysqlDB
 
 
 #
@@ -42,11 +43,32 @@ from util import DbStudy
 # def new_recharge_amount(amount, before_amount):
 #     return float(amount) + float(before_amount)
 
-def select_one_data(sql=None):  # 封装一个查询数据库一条返回数据的方法
+def select_one_data(sql):  # 封装一个查询数据库一条返回数据的方法
+
+    # s = "select * from ejy_ucs.member_coupon where member_id='2122346538';"
+    k = DbStudy.DB('dev').select_one(sql=sql)[1]
+    # v = DbStudy.DB('dev').select_one(sql=s)[1]
+    # print("你执行的sql：语句为：", sql)
+    # print("sql语句查询的结果为：", k)
+    # return k
+    return k
+
+
+def select_one_data_none():  # 封装一个查询数据库一条返回数据的方法
+
     s = "select * from ejy_ucs.member_coupon where member_id='2122346538';"
-    return list(DbStudy.DB('dev').select_one(sql=s))[1]
+    # k = DbStudy.DB('dev').select_one(sql=sql)[1]
+    v = DbStudy.DB('dev').select_one(sql=s)[1]
+    # print("你执行的sql：语句为：", sql)
+    # print("sql语句查询的结果为：", k)
+    # return k
+    return v
 
 
 if __name__ == '__main__':
     # print(select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';")[1])
-    print(select_one_data())
+    s = "select * from ejy_ucs.member_coupon where member_id='2122346538';"
+    # print(select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';"))
+    print(select_one_data_none())
+    print(select_one_data(s))
+

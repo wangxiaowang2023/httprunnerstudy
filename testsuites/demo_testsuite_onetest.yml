@@ -2,12 +2,17 @@ config:
   name: 只对一个接口测试，方便快捷
   base_url: ${ENV(CURL)}
   verify: false
+  output:
+    - token
+    - userId
 
 testcases:
   - name: 只对一个接口测试，方便快捷
     testcase: testcases/demo_testcase_onetest.yml
-  - name: demo_testcase_onetest2.yml
-    testcase: testcases/demo_testcase_onetest2.yml
+    parameters:
+      phone-smsCode: ${P(data/login.csv)}
+#  - name: demo_testcase_onetest2.yml
+#    testcase: testcases/demo_testcase_onetest2.yml
 #-
 #    name: C端2不需要传提取参的接口
 #    testcase: testcases/demo_testcase_不传参.yml

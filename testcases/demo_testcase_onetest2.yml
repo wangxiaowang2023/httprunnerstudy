@@ -1,6 +1,6 @@
 
 config:
-    name: 2查看我的优惠券
+    name: 2查看我的收藏夹
 #    output:
 #        - couponName
 #    variables:
@@ -34,8 +34,8 @@ teststeps:
 #        - eq: [ json.message, "操作成功" ]
 #        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
 -
-    name: 3查看我的优惠券
-    api: api/C端接口集/3查看我的优惠券.yml
+    name: 3查看我的收藏夹
+    api: api/单接口调试用的/2查看收藏夹.yml
 #    headers: $headers
 #    variables:
 #        user_agent: 'iOS/10.3'

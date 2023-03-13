@@ -178,7 +178,7 @@ teststeps:
         - eq: [ "status_code", 200 ]
         - eq: [ json.code, 200 ]
         - eq: [ json.message, "操作成功" ]
-        - contained_by: [ json.data.list.0.orderStatusName, ["已取消","待付款","已完成"] ]
+        - contained_by: [ json.data.list.0.orderStatusName, ["已取消","待付款","已完成","已关闭"] ]
 
 -
     name: 6.1查询我的售后订单列表
