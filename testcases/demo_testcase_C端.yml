@@ -168,7 +168,7 @@ teststeps:
         - couponName: json.data.list.0.couponName
     variables:
         sql: select * from ejy_ucs.member_coupon where member_id= $userId ;
-        sqlselect: ${select_one_data($sql)}
+        sqlselect: ${select_one_data_str($sql)}
     validate:
         - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
