@@ -87,7 +87,7 @@ def select_one_data_str_test(sql=None):
     # for i in k:
         # i += 1
         # if i == 1:
-    return k[1]
+    return str(k[1])
 
 
 def select_one_data_all(sql=None):
@@ -280,7 +280,7 @@ if __name__ == '__main__':
     d = "SELECT * FROM ensd_ocs.user_order_0 WHERE user_id='2122346538' ORDER BY create_date_time desc limit 10;"
     # print(select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';"))
     # print(select_one_data_none())
-    print(select_one_data_str_test(d))
+    print(type(select_one_data_str_test(d)))
     # print(phone())
     # print(get_NumSecondTime())
     # print(get_NumSecondTimezhongwen())
