@@ -1,12 +1,16 @@
 
 config:
     name: C端登录测试demo testcase
+    variables:
+        success: "操作成功"
     output:
         - token
         - stationId
         - orderStatusName
+        - orderId
         - couponName
         - userId
+#        - sql
 #    stationId: 10189
 #    headers:
 ##        Content-Type: application/json
@@ -33,11 +37,13 @@ teststeps:
     extract:
         - token: json.data.token
         - userId: json.data.userId
+    variables:
+        eqphone: ${ENV(PHONE)}
     validate:
-        - eq: ["status_code", 200]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.phone, "13200000001"]
+        - eq: [ json.message, $success ]
+        - eq: [ json.data.phone, $eqphone ]
 
 -
     name: 2.1查看首页油站
@@ -45,9 +51,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 2.2油站搜索GET
@@ -57,9 +63,9 @@ teststeps:
     extract:
         stationId: json.data.list.0.stationId
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 2.3油站首页--油站基本信息
@@ -72,9 +78,9 @@ teststeps:
 #        - stationId: json.data.stationId
 
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
         - eq: [ json.data.stationId, $stationId ]
 
 -
@@ -83,9 +89,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 #        - eq: [ json.data, "关注油站成功!" ]
 -
     name: 2.4添加油站进收藏夹
@@ -93,9 +99,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
         - eq: [ json.data, "关注油站成功!" ]
 
 -
@@ -104,9 +110,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
         - eq: [ json.data.orderSum, "0.11" ]
 
 -
@@ -115,9 +121,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 #        - eq: [ json.data.orderSum, "94.12" ]
 
 #-
@@ -160,11 +166,14 @@ teststeps:
 
     extract:
         - couponName: json.data.list.0.couponName
+    variables:
+        sql: select * from ejy_ucs.member_coupon where member_id= $userId ;
+        sqlselect: ${select_one_data($sql)}
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
-        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
+        - eq: [ json.message, $success ]
+        - eq: [ json.data.list.0.couponName, $sqlselect ]
 
 -
     name: 5查询我的订单列表
@@ -174,11 +183,16 @@ teststeps:
 
     extract:
         - orderStatusName: json.data.list.0.orderStatusName
+        - orderId: json.data.list.0.orderId
+    variables:
+        orderIdsql: SELECT * FROM ensd_ocs.user_order_0 WHERE user_id= $userId  ORDER BY create_date_time desc limit 1;
+        sqlselectorderId: ${select_one_data_str($orderIdsql)}
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
         - contained_by: [ json.data.list.0.orderStatusName, ["已取消","待付款","已完成","已关闭"] ]
+        - eq: [ json.data.list.0.orderId, $sqlselectorderId ]
 
 -
     name: 6.1查询我的售后订单列表
@@ -186,9 +200,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 6.2查询eplus会员信息
@@ -196,9 +210,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 6.3eplus会员页用户信息
@@ -206,9 +220,9 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 6.4查询eplus会员开通价格信息
@@ -216,18 +230,18 @@ teststeps:
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 -
     name: 6查询我的eplus状态
     api: api/C端接口集/6查询我的eplus状态GET.yml
     headers:
         Authorization: $token
     validate:
-        - eq: [ "status_code", 200 ]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 
 -
     name: 7.1测试获取一级标签
@@ -239,9 +253,9 @@ teststeps:
 #    extract:
 #        - token: json.data.token
     validate:
-        - eq: ["status_code", 200]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
         - eq: [ json.data.0.tagName, "测试标签" ]
 
 -
@@ -254,9 +268,9 @@ teststeps:
 #    extract:
 #        - token: json.data.token
     validate:
-        - eq: ["status_code", 200]
+        - eq: [ status_code, 200]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 #        - eq: [ json.data.0.tagName, "测试标签" ]
 
 -
@@ -269,7 +283,7 @@ teststeps:
 #    extract:
 #        - token: json.data.token
     validate:
-        - eq: ["status_code", 200]
+        - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
-        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.message, $success ]
 #        - eq: [ json.data.0.tagName, "测试标签" ]

@@ -1,0 +1,24 @@
+
+name: 华为钱包
+#variables:
+#    var1: value1
+#    var2: value2
+request:
+    url: https://grey.ejiayou.com/gateway/ejy-openapi/huawei/v1/station/list/query
+    method: POST
+    headers:
+        Content-Type: "application/json"
+        signType: SHA256WithRSA/PSS
+        signVersion: "0"
+        requestId: 20220128140403705d9aa01c9aba8e9
+        needVerifySign: "0"
+    json:
+#        key: $var2
+        platformName: CNczA
+        timestamp: 20220128204717
+        pageIndex: 1
+        pageSize: 100
+
+
+validate:
+    - eq: ["status_code", 200]

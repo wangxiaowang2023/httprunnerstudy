@@ -1,0 +1,23 @@
+
+config:
+    name: 登录我的测试套件demo testsuite
+    base_url: ${ENV(CURL)}
+    verify: false
+#    variables:
+#        device_sn: "XYZ"
+#    base_url: "http://127.0.0.1:5000"
+
+testcases:
+-
+    name: 测试c端登录通不通
+    testcase: testcases/testsql.yml
+#    variables:
+#        device_sn: $device_sn
+#-
+#    name: call demo_testcase with data 2
+#    testcase: path/to/demo_testcase.yml
+#    variables:
+#        device_sn: $device_sn
+#-
+#    name: C端2不需要传提取参的接口.yml
+#    testcase: testcases/demo_testcase_不传参.yml

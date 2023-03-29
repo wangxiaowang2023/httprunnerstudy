@@ -1,0 +1,89 @@
+
+config:
+    name: 试一下demo testcase
+    verify: false
+    variables:
+        sid: 2122346538
+        success: "操作成功"
+    output:
+        - token
+        - userId
+        - orderId
+#        - sql
+        - couponName
+        - orderStatusName
+        - orderId
+#    parameters:
+#        - sql: ${select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';")}
+#    headers:
+#        Content-Type: application/json
+#        longitude: "113.92224927070073"
+#        latitude: "22.54845664"
+#        adCode: "440305"
+#        sourceType: "1"
+#        clientType: "1"
+#        Connection: keep-alive
+
+teststeps:
+-
+    name: 1测试C端登录
+    api: api/单接口调试用的/1C端登录.yml
+#    headers: $headers
+#    variables:
+#        user_agent: 'iOS/10.3'
+#        device_sn: $device_sn
+    extract:
+        - token: json.data.token
+        - userId: json.data.userId
+    variables:
+        eqphone: ${ENV(PHONE)}
+    validate:
+        - eq: [ status_code, 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, $success ]
+        - eq: [ json.data.phone, $eqphone ]
+
+-
+    name: 3查看我的优惠券
+    api: api/单接口调试用的/3查看我的优惠券.yml
+    headers:
+        Authorization: $token
+    variables:
+        sql: select * from ejy_ucs.member_coupon where member_id= $userId ;
+        sqlselect: ${select_one_data($sql)}
+
+    extract:
+        - couponName: json.data.list.0.couponName
+
+    validate:
+        - eq: [ status_code, 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, $success ]
+        - eq: [ json.data.list.0.couponName, $sqlselect ]
+
+-
+    name: 5查询我的订单列表
+    api: api/单接口调试用的/5查询我的订单列表.yml
+    headers:
+        Authorization: $token
+
+    extract:
+        - orderStatusName: json.data.list.0.orderStatusName
+        - orderId: json.data.list.0.orderId
+    variables:
+        orderIdsql: SELECT * FROM ensd_ocs.user_order_0 WHERE user_id= $userId  ORDER BY create_date_time desc limit 1;
+        sqlselectorderId: ${select_one_data_str($orderIdsql)}
+    validate:
+        - eq: [ status_code, 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, $success ]
+        - contained_by: [ json.data.list.0.orderStatusName, ["已取消","待付款","已完成","已关闭"] ]
+        - eq: [ json.data.list.0.orderId, $sqlselectorderId ]
+#-
+#    name: 测试demo step 2
+#    api: api/demo_api2.yml
+#
+##    extract:
+##        - token: json.data.content.token
+#    validate:
+#        - eq: [ "status_code", 200 ]

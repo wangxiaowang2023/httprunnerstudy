@@ -34,6 +34,7 @@ class RunTime:
     # 获取到第天数
     def getNumDayTime(self):
         return self.getTime("%Y%m%d")
+
     def getPastDataDay(self, intDayNum):
         # 根据天数，来获取过去距离今天intDayNum天的日期
         # intDayNum: int类型, 表示天数

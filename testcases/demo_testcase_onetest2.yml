@@ -21,18 +21,20 @@ config:
 #        - couponName
 
 teststeps:
-#-
-#    name: 3查看我的优惠券
-#    api: api/C端接口集/3查看我的优惠券.yml
-#    headers:
-#        Authorization: $token
-#    extract:
-#        - couponName: json.data.list.0.couponName
-#    validate:
-#        - eq: [ "status_code", 200 ]
-#        - eq: [ json.code, 200 ]
-#        - eq: [ json.message, "操作成功" ]
-#        - eq: [ json.data.list.0.couponName, "自动化测试兑换" ]
+-
+    name: 3查看我的优惠券
+    api: api/C端接口集/3查看我的优惠券.yml
+    headers:
+        Authorization: $token
+    extract:
+        - couponName: json.data.list.0.couponName
+    parameters:
+        - sql: ${select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';")}
+    validate:
+        - eq: [ "status_code", 200 ]
+        - eq: [ json.code, 200 ]
+        - eq: [ json.message, "操作成功" ]
+        - eq: [ json.data.list.0.couponName, $sql ]
 -
     name: 3查看我的收藏夹
     api: api/单接口调试用的/2查看收藏夹.yml
