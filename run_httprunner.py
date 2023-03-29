@@ -10,7 +10,7 @@ runner = HttpRunner(failfast=False)
 # 测试一下webhook有没有用啊
 
 
-# runner.run('testsuites/demo_testsuite_c.yml')  # 这条是运行调试一下，
+runner.run('testsuites/demo_testsuite_c.yml')  # 这条是运行调试一下，
 
 
 os.system('chcp 65001')
@@ -18,4 +18,4 @@ os.system('chcp 65001')
 ss = "woshi是啊啊"
 # print(resull)
 cmd = "hrun .\\testsuites\demo_testsuite_c.yml --log-level debug"
-os.system(cmd)  # 这里是运行系统开局报告的命令
+# os.system(cmd)  # 这里是运行系统开局报告的命令

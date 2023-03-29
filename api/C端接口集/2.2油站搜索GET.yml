@@ -2,6 +2,7 @@
 name: 2.2油站搜索
 variables:
     var1: value1
+    stationnamea: ${ENV(STATIONNAME)}
 #    stationName: "Mike测试加油站活动测试，勿改数据"
     headers:
         Content-Type: application/json
@@ -19,7 +20,7 @@ request:
     params:
         currentPage: 1
         pageSize: 10
-        stationName: ${ENV(STATIONNAME)}
+        stationName: $stationnamea
 validate:
     - eq: ["status_code", 200]
     - eq: [ json.message, "操作成功" ]
