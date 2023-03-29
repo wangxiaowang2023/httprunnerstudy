@@ -23,7 +23,7 @@ i = 0
 for i in range(len(list1)):  # 通过下标
     i += 1
     if i == 1:
-        # print(list1[i])
+        print(list1[i])
     # else:
     #     print("没找到")
 d = "SELECT * FROM ensd_ocs.user_order_0 WHERE user_id='2122346538' ORDER BY create_date_time desc limit 10;"

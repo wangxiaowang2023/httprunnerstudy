@@ -83,12 +83,11 @@ def select_one_data_str_test(sql=None):
     :return: 返回一条数据，切片后的数据，并进行str字符串转换
     """
     k = DbStudy.DB('dev').select_one(sql=sql)
-    kk = list(k)
-    for i in range(len(kk)):
-        i += 1
-        if i == 1:
-            return str(kk[i])
-
+    # kk = list(k)  [a]
+    # for i in k:
+        # i += 1
+        # if i == 1:
+    return k[1]
 
 
 def select_one_data_all(sql=None):
