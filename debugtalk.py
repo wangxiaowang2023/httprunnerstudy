@@ -71,8 +71,24 @@ def select_one_data_str(sql=None):
     :param sql: 输入sql语句，
     :return: 返回一条数据，切片后的数据，并进行str字符串转换
     """
-    k = DbStudy.DB('dev').select_one(sql=sql)[1]
-    return str(k)
+    k = DbStudy.DB('dev').select_one(sql=sql)
+    a = str(k)[1]
+    return str(a)
+
+
+def select_one_data_str_test(sql=None):
+    """
+    封装一个查询数据库返回一条数据的方法
+    :param sql: 输入sql语句，
+    :return: 返回一条数据，切片后的数据，并进行str字符串转换
+    """
+    k = DbStudy.DB('dev').select_one(sql=sql)
+    kk = list(k)
+    for i in range(len(kk)):
+        i += 1
+        if i == 1:
+            return str(kk[i])
+
 
 
 def select_one_data_all(sql=None):
@@ -265,7 +281,7 @@ if __name__ == '__main__':
     d = "SELECT * FROM ensd_ocs.user_order_0 WHERE user_id='2122346538' ORDER BY create_date_time desc limit 10;"
     # print(select_one_data("select * from ejy_ucs.member_coupon where member_id='2122346538';"))
     # print(select_one_data_none())
-    print(select_one_data(d))
+    print(select_one_data_str_test(d))
     # print(phone())
     # print(get_NumSecondTime())
     # print(get_NumSecondTimezhongwen())

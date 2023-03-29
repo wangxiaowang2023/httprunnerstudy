@@ -16,3 +16,30 @@ Faker模块
 测试数据中包括了大量的“测试XX”，要么就是随手在键盘上一顿乱敲，都是些无意义的假数据。
 
 """
+from util import DbStudy
+
+list1 = [1, 24, 34, 44, 533, 5, 219]
+i = 0
+for i in range(len(list1)):  # 通过下标
+    i += 1
+    if i == 1:
+        # print(list1[i])
+    # else:
+    #     print("没找到")
+d = "SELECT * FROM ensd_ocs.user_order_0 WHERE user_id='2122346538' ORDER BY create_date_time desc limit 10;"
+
+
+class test_1:
+    def select_one_data_str(sql=None):
+        abe = "SELECT * FROM ensd_ocs.user_order_0 WHERE user_id='2122346538' ORDER BY create_date_time desc limit 10;"
+
+        """
+        封装一个查询数据库返回一条数据的方法
+        :param sql: 输入sql语句，
+        :return: 返回一条数据，切片后的数据，并进行str字符串转换
+        """
+        k = DbStudy.DB('dev').select_one(sql=abe)
+        a = list(k)
+        return str(a)
+if __name__ == '__main__':
+    test_1.select_one_data_str()

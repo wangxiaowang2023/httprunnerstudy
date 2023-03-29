@@ -50,7 +50,7 @@ teststeps:
         Authorization: $token
     variables:
         sql: select * from ejy_ucs.member_coupon where member_id= $userId ;
-        sqlselect: ${select_one_data($sql)}
+        sqlselect: ${select_one_data_str_test($sql)}
 
     extract:
         - couponName: json.data.list.0.couponName
@@ -72,7 +72,7 @@ teststeps:
         - orderId: json.data.list.0.orderId
     variables:
         orderIdsql: SELECT * FROM ensd_ocs.user_order_0 WHERE user_id= $userId  ORDER BY create_date_time desc limit 1;
-        sqlselectorderId: ${select_one_data_str($orderIdsql)}
+        sqlselectorderId: ${select_one_data_str_test($orderIdsql)}
     validate:
         - eq: [ status_code, 200 ]
         - eq: [ json.code, 200 ]
